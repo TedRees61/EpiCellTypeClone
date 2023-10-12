@@ -98,6 +98,7 @@ ECTProcessATAC<-function(atac_counts,RefObj,frag.file) {
   # based on code from https://github.com/AprilYuge/ATAC-annotation-benchmark/blob/main/method_running/seurat3.r
   # takes 10+minutes running CCA and long time filtering anchors
   transfer.anchors <- FindTransferAnchors(reference = RefObj, query = ATACObj, 
+                                          mapping.score.k=100,
                                           features = RefObj@assays$RNA@var.features,
                                           reduction = "cca",verbose=TRUE)
   #
@@ -107,5 +108,8 @@ ECTProcessATAC<-function(atac_counts,RefObj,frag.file) {
                                        weight.reduction = ATACObj[["lsi"]], dims = 2:30)
   #  
   ATACObj <- AddMetaData(ATACObj, metadata = celltype.predictions)
+  #mapscores<-MappingScore(transfer.anchors,ndim=30)
+  #ATACObj <- AddMetaData(ATACObj, metadata = mapscores)
+  # may add this later - needs pca data unfortunately
   
 }

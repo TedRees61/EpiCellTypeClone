@@ -58,8 +58,8 @@ source("~/Library/Mobile Documents/com~apple~CloudDocs/Projects/R Projects/ECTPr
 #   Read in Reference file (A Seurat Object)
 #
 #Cereb <- readRDS("/Users/tedrees/ProjectTest/Linardsson/CB Cerebellar Vermis.rds")
-#Cereb<- readRDS("/Users/tedrees/ProjectTest/10X Filtered PBMC/Cereb2CbDN.rds")
-Cereb<- readRDS("/Users/tedrees/ProjectTest/10X Filtered PBMC/CerebLatHem.rds")
+Cereb<- readRDS("/Users/tedrees/ProjectTest/10X Filtered PBMC/Cereb2CbDN.rds")
+#Cereb<- readRDS("/Users/tedrees/ProjectTest/10X Filtered PBMC/CerebLatHem.rds")
 #       Check its a Seurat object
 Cereb
 #       Carry out pre-processing
@@ -68,11 +68,11 @@ Cereb <- ECTProcessRefData(Cereb)
 #
 # Checkpoint Save & Read for restart
 #
-saveRDS(Cereb,file = "~/ProjectTest/10X Filtered PBMC/Cereb3PostUMAP.rds")
+saveRDS(Cereb,file = "~/ProjectTest/10X Filtered PBMC/Cereb2PostUMAP.rds")
 #
 # Restart point if needed to save time
 #
-Cereb <- readRDS("/Users/tedrees/ProjectTest/10X Filtered PBMC/Cereb3PostUMAP.rds")
+Cereb <- readRDS("/Users/tedrees/ProjectTest/10X Filtered PBMC/Cereb2PostUMAP.rds")
 Cereb <- UpdateSeuratObject(object = Cereb)
 #
 #   Part 2 - Read in MultiOmics Data for Benchmark 
@@ -99,8 +99,8 @@ frag.file <- "~/ProjectTest/10X Filtered PBMC/human_brain_3k_atac_fragments.tsv.
 RNAObj<-ECTProcessRNABenchmark(rna_counts,Cereb)
 DimPlot(RNAObj, reduction = "umap", group.by = "predicted.id")
 table(RNAObj$predicted.id)
-saveRDS(RNAObj,file = "~/ProjectTest/RNAObjGroundTruth3.rds")
-write.csv(RNAObj@meta.data,file="RNAObjmeta3.csv")  
+saveRDS(RNAObj,file = "~/ProjectTest/RNAObjGroundTruth2.rds")
+write.csv(RNAObj@meta.data,file="RNAObjmeta2.csv")  
 #
 #   Part 4 - Process the ATAC part to derive benchmark results celltype labels per barcode. 
 #   This includes generation of synthetic RNA Assay
@@ -108,9 +108,9 @@ write.csv(RNAObj@meta.data,file="RNAObjmeta3.csv")
 ATACObj<-ECTProcessATAC(atac_counts,Cereb,frag.file)
 DimPlot(ATACObj, reduction = "umap", group.by = "predicted.id")
 table(ATACObj$predicted.id)
-saveRDS(ATACObj,file = "~/ProjectTest/ATACObjPredictions3.rds")
-write.csv(ATACObj@meta.data,file="ATACObjPred3.csv")
+saveRDS(ATACObj,file = "~/ProjectTest/ATACObjPredictions2.rds")
+write.csv(ATACObj@meta.data,file="ATACObjPred2.csv")
 # in case we need to build docker etc later
-writeLines(capture.output(sessionInfo()), "sessionInfo3.txt")
+writeLines(capture.output(sessionInfo()), "sessionInfo2.txt")
 
   

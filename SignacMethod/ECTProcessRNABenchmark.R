@@ -56,14 +56,17 @@ ECTProcessRNABenchmark<-function(rna_counts,RefObj) {
   # Section to transfer anchors from Reference (RefObj) to query (RNAObj) based on RNA seq data to create benchmark
   #
   rna.anchors <- FindTransferAnchors(reference = RefObj, query = RNAObj,
-                                       dims = 1:30, reference.reduction = "pca",verbose=TRUE)
+                                     mapping.score.k=100,
+                                    dims = 1:30, reference.reduction = "pca",verbose=TRUE)
   #
   # Could transfer different cluster info if required
  
+  mapscores<-MappingScore(rna.anchors,ndim=30)
   predictions <- TransferData(anchorset = rna.anchors, refdata = RefObj$cell_type,
                               dims = 1:30)
   
   RNAObj <- AddMetaData(RNAObj, metadata = predictions)
+  RNAObj <- AddMetaData(RNAObj, metadata = mapscores, col.name = "mapping.score")
 
 
   

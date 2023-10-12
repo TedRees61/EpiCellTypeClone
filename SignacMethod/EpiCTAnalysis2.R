@@ -8,8 +8,8 @@
 library(MLmetrics)
 #install.packages("pROC")
 library(pROC)
-GroundTruth<-read.csv("RNAObjmeta3.csv")
-ATACpredictions<-read.csv("ATACObjPred3.csv")
+GroundTruth<-read.csv("RNAObjmeta2.csv")
+ATACpredictions<-read.csv("ATACObjPred2.csv")
 #
 # Code added to allow filtering out items with outlier QC data
 #
@@ -40,12 +40,8 @@ plotROC<-function(CellType,SeurPred,SeurTruth)
   print(ConfusionMatrix(y_pred,y_truth))
   evalstr=paste("y_prob<-SeurPred$prediction.score.",ACTvbl,sep="")
   eval(parse(text=evalstr))
-  print(max(y_prob))
-  print(sum(y_truth))
-  if (sum(y_truth)>0) {
-    roc_obj <- roc(y_truth, y_prob)
-  }
-  
+  roc_obj <- roc(y_truth, y_prob)
+
   
   
   
@@ -76,11 +72,11 @@ mcc <- function (actual, predicted)
 
 AnalysisCellList<-c(
                      "astrocyte",
-                     "Bergmann glial cell",
+#                     "Bergmann glial cell",
                      "central nervous system macrophage",
                      "endothelial cell",
                     "fibroblast",
-                    "leukocyte",
+                     "leukocyte",
                      "neuron",
                      "oligodendrocyte",
                      "oligodendrocyte precursor cell",
@@ -89,7 +85,7 @@ AnalysisCellList<-c(
 )
 LegendCellList<-c(
   "Astrocyte",
-  "Bergmann glial cell",
+#  "Bergmann glial cell",
   "CNS macrophage",
   "Endothelial cell",
   "Fibroblast",
@@ -110,16 +106,13 @@ plot(P1,
      col = colors[1])
 ResultsPerType$auROC[1]<-P1$auc
 
-for (i in 3:length(AnalysisCellList)) {
+
+for (i in 2:length(AnalysisCellList)) {
   AnalysisCellType<-AnalysisCellList[i]
   P1<-plotROC(AnalysisCellType,ATACpredictions,GroundTruth)
-  #  if(sum(ATACpredictions)>0)
-  #{
-    lines(P1,col=colors[i])
-    ResultsPerType$auROC[i]<-P1$auc
-  #}
-  #else
-  #{ResultsPerType$auROC[i]<-0}
+  lines(P1,col=colors[i])
+  ResultsPerType$auROC[i]<-P1$auc
+
 }
 
 
@@ -216,11 +209,11 @@ for (i in 2:length(AnalysisCellList)) {
   CM<-ConfusionMatrix(binPred,truth)
   if(ncol(CM)==2) {
     if(nrow(CM)==1) {
-      print(paste("NOT SURE FP:",CM[1,2],"TN:",CM[1,1]))
-      ResultsPerType$TP[i]<-0
+      print(paste("NOT SURE FP:",CM[1,2],"TP:",CM[1,1]))
+      ResultsPerType$TN[i]<-0
       ResultsPerType$FN[i]<-0
-      ResultsPerType$FP[i]<-CM[1,2]
-      ResultsPerType$TN[i]<-CM[1,1] 
+      ResultsPerType$TP[i]<-CM[1,2]
+      ResultsPerType$FP[i]<-CM[1,1] 
       
     }
     else {
@@ -257,5 +250,5 @@ legend("bottomright",
        cex = 0.8)
 
 #save results in CSV file
-write.csv(ResultsPerType,file="CellTypingResults3.csv")
+write.csv(ResultsPerType,file="CellTypingResults2.csv")
 ResultsPerType
