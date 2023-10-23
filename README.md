@@ -5,7 +5,6 @@ This was initially carried out as part of an M.Sc. Genomic Medicine Project at I
 
 The code provided here provides the materials used to carry out this benchmarking process as shown in the schematic below: -
 
- ![image](https://github.com/neurogenomics/benchmark_epig_celltyping/assets/78317272/f38c5159-6e77-4ec1-a6ec-b60b999bddaf)
 
 High level Benchmark Process Outline
 a.	scRNA-seq and scATAC-seq from multi-omic benchmarking data processed separately
