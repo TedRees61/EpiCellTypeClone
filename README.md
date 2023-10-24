@@ -39,5 +39,5 @@ This is contained in the ECTProcessATAC.R  Code
 
 The **performance analysis (e)** is carried out in EpiCTAnalysis1/2/3.R  for each of the reference datasets as above. This uses the ground truth (RNAObjmeta.csv) and ATACseq based predictions (ATACObjPred.csv) from steps (c) and (d) above. Summary results are generated for each cell type including confusion matrix, AuPR, AUROC and MCC and output in CellTypingResults1/2/3.csv This data can then be presented in tabular form or analysed in the Plotting.R code which generates suitable plots.
 
-The dissertation paper is available in this repository in the pdf.
+The dissertation paper is available in this repository in the dissertation pdf.
 
