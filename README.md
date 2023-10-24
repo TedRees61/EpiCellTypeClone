@@ -31,11 +31,13 @@ https://satijalab.org/seurat/articles/integration_mapping
 
 This is covered in the function ECTProcessRNABenchmark.R in the Signac Method directory
  
-For the **scRNA-seq annotated reference (c)** we used 3 datasets related to the cerebellum from. These were derived from a recently published paper and are available as Seurat Objects on the CEllXGene data repository.
+For the **scRNA-seq annotated reference (c)** we used 3 datasets related to the cerebellum from https://cellxgene.cziscience.com/datasets. These were derived from a [recently published paper](https://www.science.org/doi/10.1126/science.add7046) and are available as Seurat Objects on the CEllXGene data repository.
 
-The **Machine Learning Classifier (d)** was based on the Signac method documented in the GeneActivity part of this vignette and using the CCA version of the label transfer method described for the standard method for scRNA explained above.
+The **Machine Learning Classifier (d)** was based on the Signac method documented in the GeneActivity part of [this vignette](https://stuartlab.org/signac/articles/pbmc_vignette) and using the CCA version of the label transfer method described for the standard method for scRNA explained above.
 
 This is contained in the ECTProcessATAC.R  Code 
 
-The **performance analysis (e)** is carried out in EpiCTAnalysis1/2/3.R  for each of the reference datasets as above. This uses the ground truth (RNAObjmeta.csv) and ATACseq based predictions (ATACObjPred.csv) from steps (c) and (d) above. Summary results are generated for each cell type including confusion matrix, AuPR, AUROC and MCC and output in CellTypingResults1/2/3.csv This data can then be presented in tabular form or analysed in the Plotting.R code which generates suitable plots
+The **performance analysis (e)** is carried out in EpiCTAnalysis1/2/3.R  for each of the reference datasets as above. This uses the ground truth (RNAObjmeta.csv) and ATACseq based predictions (ATACObjPred.csv) from steps (c) and (d) above. Summary results are generated for each cell type including confusion matrix, AuPR, AUROC and MCC and output in CellTypingResults1/2/3.csv This data can then be presented in tabular form or analysed in the Plotting.R code which generates suitable plots.
+
+The dissertation paper is available in this repository in the pdf.
 
